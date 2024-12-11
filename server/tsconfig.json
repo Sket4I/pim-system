@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+
+    "outDir": "./dist",
+    "rootDir": "./",
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+
+    "baseUrl": ".",
+    "typeRoots": ["./@types", "./node_modules/@types"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "esModuleInterop": true,
+    "importsNotUsedAsValues": "preserve",
+
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": ["node_modules", "dist", "gulpfile.ts"],
+
+  "ts-node": {
+    "transpileOnly": true
+  }
+}

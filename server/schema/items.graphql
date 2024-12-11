@@ -1,0 +1,67 @@
+type Query {
+  getItems(parentId: ID!, offset: Int!, limit: Int!, order: JSON): ItemsResponse
+  getItem(id: ID!): Item
+  getItemsByIds(ids: [ID]!): [Item]
+  getItemByIdentifier(identifier: String!): Item
+  getAssets(id: ID!): [Asset]
+  getMainImages(ids: [ID]!) : [Thumbnail]
+  hasRelations(id: ID!): Boolean!
+  getItemsForRelationAttribute(attrIdentifier: String!, value: [ID]!, searchStr: String, langIdentifier: String!, limit: Int!, offset: Int!, order: String!): [Item]
+  getItemsForRelationAttributeImport(attrIdentifier: String!, searchArr: [String]!, langIdentifier: String!, limit: Int!, offset: Int!, order: String!): [Item]
+}
+
+type Mutation {
+  createItem(parentId: ID, identifier: String!, name: LanguageDependentString!, typeId: ID!, values: JSONObject, channels: JSONObject): Item!
+  updateItem(id: ID!, name: LanguageDependentString, values: JSONObject, channels: JSONObject) : Item!
+  moveItem(id: ID!, parentId: ID!) : Item!
+  removeItem(id: ID!) : Boolean!
+  removeFile(id: ID!) : Boolean!
+}
+
+type Asset {
+  id: ID!
+  typeId: ID!
+  identifier: String!
+  name: LanguageDependentString!
+  relationName: LanguageDependentString!
+  relationId: ID!
+  image: Boolean!
+  mainImage: Boolean!
+  mimeType: String!
+  fileOrigName: String!
+}
+
+type Thumbnail {
+  itemId: ID!
+  id: ID!
+  identifier: String!
+}
+
+type ItemsResponse {
+  count: Int
+  rows: [Item]
+}
+
+type Item {
+  id: ID!
+  path: String!
+  identifier: String!
+  parentIdentifier: String
+  name: LanguageDependentString!
+  typeId: ID!
+  typeIdentifier: String!
+  values: JSONObject
+  channels: JSONObject
+  mimeType: String
+  fileOrigName: String
+  createdBy: String!
+  createdAt: UTCDateTime!
+  updatedBy: String!
+  updatedAt: UTCDateTime!
+}
+
+type PathInfo {
+  id: ID!
+  identifier: String!
+  name: LanguageDependentString!
+}

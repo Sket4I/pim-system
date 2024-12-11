@@ -1,0 +1,41 @@
+type Query {
+  getActions: [Action]
+}
+
+type Mutation {
+  createAction(identifier: String!, name: LanguageDependentString!, code: String!, order: Int, triggers: JSON!): ID!
+  updateAction(id: ID!, name: LanguageDependentString, code: String, order: Int, triggers: JSON) : ID!
+  removeAction(id: ID!) : Boolean!
+  executeButtonAction(itemId: ID!, buttonText: String!, data: String) : ButtonActionResult!
+  executeTableButtonAction(itemId: ID, buttonText: String!, where: String!, headers: String!, data: String, ) : ButtonActionResult!
+  executeAction(itemId: ID!, actionIdentifier: ID!, data: String) : ButtonActionResult!
+  testAction(itemId: ID!, actionId: ID!) : ActionTestResult
+}
+
+type Action {
+  id: ID!
+  identifier: String!
+  name: LanguageDependentString!
+  code: String!
+  triggers: JSON!
+  order: Int!
+  createdBy: String!
+  createdAt: UTCDateTime!
+  updatedBy: String!
+  updatedAt: UTCDateTime!
+}
+
+type ActionTestResult {
+  log: String!
+  failed: Boolean!
+  error: String,
+  compileError: String,
+  message: String,
+}
+
+type ButtonActionResult {
+  error: String,
+  compileError: String,
+  message: String,
+  data: JSON
+}

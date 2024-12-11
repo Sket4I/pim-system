@@ -1,0 +1,5 @@
+{
+    "trimSearch": true,
+    "caseInsensitiveLogin": true,
+    "wbRequestDelay": 700
+}

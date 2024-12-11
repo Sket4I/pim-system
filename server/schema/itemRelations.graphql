@@ -1,0 +1,46 @@
+type Query {
+  getSourceRelations(itemId: ID!, relationId: ID!, offset: Int!, limit: Int!, where: JSONObject): ItemRelationsResponse
+  getTargetRelations(itemId: ID!, relationId: ID!, offset: Int!, limit: Int!, where: JSONObject): ItemRelationsResponse
+  getItemRelation(id: ID!): ItemRelation
+  getItemRelationByIdentifier(identifier: String!): ItemRelation
+  getItemRelationsChildren(itemId: ID!, offset: Int!, limit: Int!, sort: String): ItemRelationsChildrenResponse
+}
+
+type Mutation {
+  createItemRelation(identifier: String!, itemId: ID!, relationId: ID!, targetId: ID!, values: JSONObject): ItemRelation!
+  updateItemRelation(id: ID!, itemId: ID, targetId: ID, values: JSONObject) : ItemRelation!
+  removeItemRelation(id: ID!) : Boolean!
+}
+
+type ItemRelation {
+  id: ID!
+  identifier: String!
+  relationId: ID!
+  item: ItemInfo!
+  target: ItemInfo!
+  values: JSONObject
+  createdBy: String!
+  createdAt: UTCDateTime!
+  updatedBy: String!
+  updatedAt: UTCDateTime!
+}
+
+type ItemRelationsChildrenResponse {
+  count: Int
+  rows: [Item]
+}
+
+type ItemRelationsResponse {
+  count: Int
+  rows: [ItemRelation]
+}
+
+type ItemInfo {
+  id: ID!
+  identifier: String!
+  name: LanguageDependentString!
+  typeId: ID!
+  fileOrigName: String
+  mimeType: String
+  updatedAt: UTCDateTime!
+}

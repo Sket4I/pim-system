@@ -1,0 +1,61 @@
+type Query {
+  me: User
+  getRoles: [Role] 
+  getUsers: [User] 
+  hasLogin(login: String!): Boolean!
+  getTenants: [ID]
+  getTenantUsers(tenantId: ID!): [User]
+}
+
+type Mutation {
+  signInAs(id: ID!): LoginResponse!
+  signIn(login: String!, password: String!): LoginResponse!
+  reloadModel(tenantId: ID!): Boolean!
+  createUser(login: String!, name: String!, password: String!, email: String, roles: JSON, props: JSONObject, options: JSON): ID!
+  updateUser(id: ID!, name: String, password: String, email: String, roles: JSON, props: JSONObject, options: JSON): ID!
+  removeUser(id: ID!) : Boolean!
+  createRole(identifier: String!, name: String!, configAccess: JSONObject, relAccess: JSONObject, itemAccess: JSONObject, channelAccess: JSON, otherAccess: JSONObject, options: JSON): ID!
+  updateRole(id: ID!, name: String, configAccess: JSONObject, relAccess: JSONObject, itemAccess: JSONObject, channelAccess: JSON, otherAccess: JSONObject, options: JSON) : ID!
+  removeRole(id: ID!) : Boolean!
+}
+
+type LoginResponse {
+  token: String!
+  user: User!
+  auditEnabled: Boolean!
+  locale: String
+}
+
+type User {
+  id: ID!
+  internalId: Int!
+  tenantId: ID!
+  login: String!
+  name: String!
+  roles: [ID]!
+  email: String
+  props: JSONObject
+  options: JSON!
+  external: Boolean!
+  createdBy: String!
+  createdAt: UTCDateTime!
+  updatedBy: String!
+  updatedAt: UTCDateTime!
+}
+
+type Role {
+  id: ID!
+  internalId: Int!
+  identifier: String!
+  name: String!
+  configAccess: JSONObject
+  relAccess: JSONObject
+  itemAccess: JSONObject
+  otherAccess: JSONObject
+  channelAccess: JSON
+  options: JSON!
+  createdBy: String!
+  createdAt: UTCDateTime!
+  updatedBy: String!
+  updatedAt: UTCDateTime!
+}

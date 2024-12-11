@@ -1,0 +1,35 @@
+scalar JSON
+scalar JSONObject
+scalar LanguageDependentString
+scalar UTCDateTime
+
+# import Query.*, Mutation.* from "users.graphql"
+# import Query.*, Mutation.* from "types.graphql"
+# import Query.*, Mutation.* from "attributes.graphql"
+# import Query.*, Mutation.* from "relations.graphql"
+# import Query.*, Mutation.* from "items.graphql"
+# import Query.*, Mutation.* from "importConfigs.graphql"
+# import Query.*, Mutation.* from "languages.graphql"
+# import Query.*, Mutation.* from "itemRelations.graphql"
+# import Query.*, Mutation.* from "lovs.graphql"
+# import Query.*, Mutation.* from "search.graphql"
+# import Query.*, Mutation.* from "actions.graphql"
+# import Query.*, Mutation.* from "dashboards.graphql"
+# import Query.*, Mutation.* from "channels.graphql"
+# import Mutation.* from "import.graphql"
+# import Query.* from "audit.graphql"
+# import Query.*, Mutation.* from "collections.graphql"
+# import Query.*, Mutation.* from "processes.graphql"
+# import Query.*, Mutation.* from "auth.graphql"
+# import Query.* from "reload.graphql"
+
+type Query {
+  ping: String
+  serverConfig: JSONObject
+  nextId(seqName:String): String
+}
+
+type Mutation {
+  logLevel(level: String!) : Boolean!
+  query(query: String!) : JSON!
+}
